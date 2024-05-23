@@ -1,0 +1,3 @@
+[submodule "xlock"]
+	path = xlock
+	url = https://github.com/EddyPrime/xlock.git
