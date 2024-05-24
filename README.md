@@ -10,6 +10,7 @@ Python packages
 ```shell
 pyserial
 numpy
+tqdm
 ```
 
 ### Arduino
@@ -41,7 +42,7 @@ To read data from the board, do the following steps:
 
 1. Set up the parameters, i.e. the number of bytes
 2. Compile and upload the program onto the board. You can do this by using, for instance, the Arduino IDE
-3. Identify the port where your device is connected to and hardcode it into the variable `SERIAL_PORT` in `serial_monitor.py`
+3. Identify the port where your device is connected to and hardcode it into the variable `SERIAL_PORT` in `serial_monitor.py` (again, the Arduino IDE should point it out)
 4. Start the monitor by running
 ```shell
 python3 serial_monitor.py
@@ -51,7 +52,7 @@ python3 serial_monitor.py
 7. Disconnect the device from your computer
 8. Wait some seconds to let the memory cells completely discharge
 9. Repeat from 5
-10. Once the amount of strings collected makes you happy, press `Ctrl-C` or `Cmd-C` to exit the program
+10. Once the amount of strings collected makes you happy, press `Ctrl-C` to exit the program
 
 Once you collected some strings from the device, you may want to compute some metrics. Run
 ```shell
@@ -80,7 +81,7 @@ This is a Git Submodule that refers to [this repository](https://github.com/Eddy
 To compile run:
 - `make` for an optimized compilation
 - `make debug` to have more debug information
-- `make speed` to include also speed metrics
+- `make test` to include also speed metrics
 
 After compilation, execute the code by running
 ```shell

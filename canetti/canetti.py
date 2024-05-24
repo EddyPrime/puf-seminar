@@ -138,7 +138,7 @@ if __name__ == "__main__":
     with open("../arduino/data.txt") as f:
         lines = [[int(x) for x in line.strip()] for line in f.readlines()]
 
-    random_w = 0  #
+    random_w = 1
 
     n = 1024 if random_w else len(lines[0])  # length of puf response
     k = 80  # length of key
