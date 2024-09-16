@@ -2,7 +2,8 @@ import serial
 import time
 
 BAUD_RATE = 115200
-SERIAL_PORT = "/dev/cu.usbmodem14301"
+with open("port.txt") as f:
+    SERIAL_PORT = f.readline()
 
 sleep_seconds = 1
 
