@@ -71,5 +71,5 @@ if __name__ == "__main__":
     )
     print(f"|1s| : {number_of_ones} , |0s| : {len(lines[0]) - number_of_ones}")
     print(
-        f"unifomrmity : {round(max(number_of_ones, len(lines[0]) - number_of_ones) / len(lines[0]) * 100,3)} %"
+        f"uniformity : {round(max(number_of_ones, len(lines[0]) - number_of_ones) / len(lines[0]) * 100,3)} %"
     )
