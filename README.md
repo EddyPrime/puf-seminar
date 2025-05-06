@@ -42,7 +42,7 @@ To read data from the board, do the following steps:
 
 1. Set up the parameters, i.e. the number of bytes
 2. Compile and upload the program onto the board. You can do this by using, for instance, the Arduino IDE
-3. Identify the port where your device is connected to and hardcode it into the variable `SERIAL_PORT` in `serial_monitor.py` (again, the Arduino IDE should point it out)
+3. Identify the port where your device is connected to and hardcode it into a file `port.txt` inside the `arduino` folder (again, the Arduino IDE should point it out)
 4. Start the monitor by running
 ```shell
 python3 serial_monitor.py

@@ -3,7 +3,7 @@ import time
 
 BAUD_RATE = 115200
 with open("port.txt") as f:
-    SERIAL_PORT = f.readline()
+    SERIAL_PORT = f.read().strip()
 
 sleep_seconds = 1
 
