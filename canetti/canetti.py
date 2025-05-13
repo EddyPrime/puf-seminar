@@ -135,15 +135,17 @@ if __name__ == "__main__":
     from tqdm import tqdm
     from random import randrange
 
-    with open("../arduino/data.txt") as f:
-        lines = [[int(x) for x in line.strip()] for line in f.readlines()]
-
     random_w = 1
+
+    if not random_w:
+        with open("../arduino/data.txt") as f:
+            lines = [[int(x) for x in line.strip()] for line in f.readlines()]
 
     n = 1024 if random_w else len(lines[0])  # length of puf response
     k = 80  # length of key
     eabs = 0.03  # absolute error rate of puf
     t = math.ceil(n * eabs)  # number of bits to tolerate
+    tprime = t
     delta = 0.0018 * 2  # error rate of rep
     l = set_l(n, k, t, delta)  # canetti parameter
 
@@ -154,8 +156,10 @@ if __name__ == "__main__":
     print(f"delta   : {delta}")
     print(f"l       : {l}")
 
-    experiments = 10  # number of experiments
-    execution_time = 0
+    experiments = 10
+    total_gen_time = 0
+    total_rep_time = 0
+    total_time = 0
     errors = 0
     helper_data_size = 0
 
@@ -175,7 +179,7 @@ if __name__ == "__main__":
         gen_time = time.time() - start_time
 
         wprime = (
-            np.array(switch(w, t))
+            np.array(switch(w, tprime))
             if random_w
             else np.array(lines[randrange(len(lines))])
         )
@@ -190,14 +194,15 @@ if __name__ == "__main__":
 
         errors += 0 if key_rep == key else 1
 
-        # print(f"gen_time : {gen_time}")
-        # print(f"rep_time : {rep_time}")
-        # print(f"tot_time : {gen_time + rep_time}")
-
-        execution_time += gen_time + rep_time
+        total_gen_time += gen_time
+        total_rep_time += rep_time
 
         helper_data_size += get_size_of_helper_data_bits(n, helper_data) // 8
 
-    print(f"errors        : {errors}")
-    print(f"time      (s) : {round(execution_time / experiments,9)}")
-    print(f"memory (bits) : {round(helper_data_size / experiments,3)}")
+    total_time = total_gen_time + total_rep_time
+
+    print(f"errors                : {errors}")
+    print(f"average gen time  (s) : {round(total_gen_time / experiments,9)}")
+    print(f"average rep time  (s) : {round(total_rep_time / experiments,9)}")
+    print(f"average time      (s) : {round(total_time / experiments,9)}")
+    print(f"average memory (bits) : {round(helper_data_size / experiments,3)}")
